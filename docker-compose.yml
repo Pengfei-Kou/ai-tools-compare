@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: aitc-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aitc
+      POSTGRES_PASSWORD: aitc_secret
+      POSTGRES_DB: aitc_db
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - aitc-pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aitc -d aitc_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: aitc-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://aitc:aitc_secret@postgres:5432/aitc_db
+    volumes:
+      - ./backend:/app
+    expose:
+      - "8000"
+
+  frontend:
+    build: ./frontend
+    container_name: aitc-frontend
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    expose:
+      - "4321"
+
+volumes:
+  aitc-pg-data:

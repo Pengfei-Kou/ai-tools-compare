@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Compare AI models, pricing, and performance. Find the best AI API for your project.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | AI Tools Compare</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header-inner">
+        <a href="/" class="logo">AI Tools Compare</a>
+        <nav>
+          <a href="/models">Models</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/blog">Blog</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 AI Tools Compare. Built with Astro + FastAPI.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .header {
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    background-color: var(--color-bg);
+    z-index: 100;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  nav a {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  nav a:hover {
+    color: var(--color-primary);
+  }
+
+  main {
+    min-height: calc(100vh - 140px);
+    padding: 2rem 1.5rem;
+  }
+
+  .footer {
+    border-top: 1px solid var(--color-border);
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+</style>
