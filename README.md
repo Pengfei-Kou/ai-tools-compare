@@ -101,17 +101,17 @@ Full interactive documentation available at /api/v1/docs.
 
 ## Roadmap
 
-- [] Price calculator (estimate monthly cost by usage)
+- [ ] Price calculator (estimate monthly cost by usage)
 
-- [] Historical price tracking and trend charts
+- [ ] Historical price tracking and trend charts
 
-- [] Blog section with MDX articles
+- [ ] Blog section with MDX articles
 
-- [] Automated price scraper for provider APIs
+- [ ] Automated price scraper for provider APIs
 
-- [] pytest + Vitest test coverage
+- [ ] pytest + Vitest test coverage
 
-- [] GitHub Actions CI/CD pipeline
+- [ ] GitHub Actions CI/CD pipeline
 
 ## License
 MIT
