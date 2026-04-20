@@ -41,6 +41,7 @@ All services run as isolated Docker containers on a shared Docker network. The f
 - Node.js 22+ (if running frontend outside container)
 - Python 3.12+ with `uv` (if running backend outside container)
 ### Setup
+
 ```bash
 git clone https://github.com/Pengfei-Kou/ai-tools-compare.git
 cd ai-tools-compare
@@ -50,12 +51,17 @@ Services will be available at:
 Frontend: http://localhost:4321
 Backend API: http://localhost:8000/api/v1/docs
 Postgres: localhost:5433
-Database Migrations
+```
+
+### Database Migrations
+```
 docker compose exec backend uv run alembic revision --autogenerate -m "describe change"
 docker compose exec backend uv run alembic upgrade head
-Seed Data
-docker compose exec backend uv run python -m scripts.seed_models
-Project Structure
+```
+### Seed Data
+`docker compose exec backend uv run python -m scripts.seed_models`
+
+## Project Structure
 ai-tools-compare/
 ├── backend/                    # FastAPI backend
 │   ├── app/
@@ -81,34 +87,31 @@ ai-tools-compare/
 │   ├── astro.config.mjs
 │   └── package.json
 └── docker-compose.yml          # Multi-service orchestration
-API Overview
-Method	Endpoint	Description
-GET
-/health
-Health check
-GET
-/api/v1/models/
-List all active AI models
-GET
-/api/v1/models/{id}
-Get a specific model
-POST
-/api/v1/models/
-Create a new model
+## API Overview
+
+| Method | Endpoint            | Description               |
+| ------ | ------------------- | ------------------------- |
+| GET    | /health             | Health check              |
+| GET    | /api/v1/models/     | List all active AI models |
+| GET    | /api/v1/models/{id} | Get a specific model      |
+| POST   | /api/v1/models/     | Create a new model        |
+
 Full interactive documentation available at /api/v1/docs.
 
-Roadmap
 
- Price calculator (estimate monthly cost by usage)
+## Roadmap
 
- Historical price tracking and trend charts
+- [] Price calculator (estimate monthly cost by usage)
 
- Blog section with MDX articles
+- [] Historical price tracking and trend charts
 
- Automated price scraper for provider APIs
+- [] Blog section with MDX articles
 
- pytest + Vitest test coverage
+- [] Automated price scraper for provider APIs
 
- GitHub Actions CI/CD pipeline
-License
+- [] pytest + Vitest test coverage
+
+- [] GitHub Actions CI/CD pipeline
+
+## License
 MIT
