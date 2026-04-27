@@ -1,5 +1,7 @@
 # AI Tools Compare
 
+[![CI](https://github.com/Pengfei-Kou/ai-tools-compare/actions/workflows/ci.yml/badge.svg)](https://github.com/Pengfei-Kou/ai-tools-compare/actions/workflows/ci.yml)
+
 A full-stack web application for comparing AI model pricing, context windows, and capabilities across major providers (OpenAI, Anthropic, Google, DeepSeek).
 
 Live demo: [ai-compare.duckdns.org](https://ai-compare.duckdns.org)
