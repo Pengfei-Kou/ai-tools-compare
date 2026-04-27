@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import DateTime, Float, Integer, String, Text, func
+from sqlalchemy import DateTime, Float, Index, Integer, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base
@@ -8,6 +8,12 @@ from app.models.base import Base
 
 class AIModel(Base):
     __tablename__ = "ai_models"
+    __table_args__ = (
+        Index("ix_ai_models_provider", "provider"),
+        Index("ix_ai_models_category", "category"),
+        Index("ix_ai_models_input_price", "input_price"),
+        Index("ix_ai_models_is_active", "is_active"),
+    )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(100), unique=True)
