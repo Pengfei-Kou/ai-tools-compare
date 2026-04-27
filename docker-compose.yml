@@ -26,18 +26,18 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: postgresql+asyncpg://aitc:aitc_secret@postgres:5432/aitc_db
-    volumes:
-      - ./backend:/app
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-change_me_in_production}
+      ALLOWED_ORIGINS: https://ai-compare.duckdns.org
     expose:
       - "8000"
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        PUBLIC_API_URL: https://ai-compare-api.duckdns.org/api/v1
     container_name: aitc-frontend
     restart: unless-stopped
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
     expose:
       - "4321"
 
